@@ -617,7 +617,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: INITIALIZED;ZIP_AVAILABLE
+    Standalone: ZIP_AVAILABLE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
