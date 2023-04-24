@@ -1,0 +1,88 @@
+{
+    "managedList": [
+        {
+            "packageName": "OpenAI",
+            "fileNames": [
+                "OpenAI_API"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Bcl.AsyncInterfaces",
+            "fileNames": [
+                "Microsoft.Bcl.AsyncInterfaces"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Http",
+            "fileNames": [
+                "Microsoft.Extensions.Http"
+            ]
+        },
+        {
+            "packageName": "Newtonsoft.Json",
+            "fileNames": [
+                "Newtonsoft.Json"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.DependencyInjection.Abstractions",
+            "fileNames": [
+                "Microsoft.Extensions.DependencyInjection.Abstractions"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Logging",
+            "fileNames": [
+                "Microsoft.Extensions.Logging"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Options",
+            "fileNames": [
+                "Microsoft.Extensions.Options"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Configuration.Binder",
+            "fileNames": [
+                "Microsoft.Extensions.Configuration.Binder"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Logging.Abstractions",
+            "fileNames": [
+                "Microsoft.Extensions.Logging.Abstractions"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Primitives",
+            "fileNames": [
+                "Microsoft.Extensions.Primitives"
+            ]
+        },
+        {
+            "packageName": "System.ComponentModel.Annotations",
+            "fileNames": [
+                "System.ComponentModel.Annotations"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Configuration",
+            "fileNames": [
+                "Microsoft.Extensions.Configuration"
+            ]
+        },
+        {
+            "packageName": "System.Runtime.CompilerServices.Unsafe",
+            "fileNames": [
+                "System.Runtime.CompilerServices.Unsafe"
+            ]
+        },
+        {
+            "packageName": "Microsoft.Extensions.Configuration.Abstractions",
+            "fileNames": [
+                "Microsoft.Extensions.Configuration.Abstractions"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99015e0b414d7c94bbc4974328f17383, type: 3}
+  m_Name: SampleEmbeddingsContainer
+  m_EditorClassIdentifier: 
+  m_AssetBinderList:
+  - m_Name: Autocannon - Shot 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: bb2e2714f962491428dcb0b38598b251, type: 3}
+    m_Embedding: {fileID: 11400000, guid: e7058802c902679448a18bd2c0c43346, type: 2}
+  - m_Name: Bloody punch
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 9d3bd82d2f09ea34e8e2c0f8c68510d7, type: 2}
+  - m_Name: Bullet Impact 14
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 75adfe9a619833445a701305b983e548, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 78a25f9f503ba81418242d05282c0334, type: 2}
+  - m_Name: Bullet Impact 21
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: e11a5a019377fbd4c81caa0adcb4c236, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 01a3b697567413d46a0d7c0e626e30b7, type: 2}
+  - m_Name: Bullet Impacts - Multiple 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 0b93f9af63befa2478916a5396131fff, type: 3}
+    m_Embedding: {fileID: 11400000, guid: ddeda6e897e9b2a41ae2ae838c2d06bf, type: 2}
+  - m_Name: Cannon impact 9
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 5ff823f546b52574a931e1d9b44290a6, type: 3}
+    m_Embedding: {fileID: 11400000, guid: d3972db3da4c6ff448a7b862de802053, type: 2}
+  - m_Name: Carriage on Stone Road - Loop
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 1b46c101cacd70a4fa09545bf0d68820, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 6b1ae19f9daa2cf40945d917f5ab2f89, type: 2}
+  - m_Name: Cavern Atmosphere - Loop
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 6d2e2db0b97a8c84e9b7aba22496d5fe, type: 3}
+    m_Embedding: {fileID: 11400000, guid: c8dff55227b84944a8aada49166034f6, type: 2}
+  - m_Name: Chemistry reaction 3 - Big
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 4144ed0d6abcc42479fe873c54bbe0fa, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 6896af07aa630b648be83b0418c8f9c1, type: 2}
+  - m_Name: Computer explosion 6 - Alarm
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 65b3207f91d67094e87be85dbe54c89d, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 46446039e02ce354e8d93e8d210d7c08, type: 2}
+  - m_Name: Dragon Spit Fire 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 7d156b8a5b340cd46bcf0a76557dd2dd, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 930e07529aaa04049b1992b0bbb9277f, type: 2}
+  - m_Name: Earthquake 3 - Big
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 5ae4d298ed547ba4c88587effb75d7e1, type: 3}
+    m_Embedding: {fileID: 11400000, guid: a11064f6eebd17c49aec00af0c158beb, type: 2}
+  - m_Name: Easy Going Medieval Tavern - Loop
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: cdfab68e200464842847522ffb19ae13, type: 3}
+    m_Embedding: {fileID: 11400000, guid: a4afe4c767c82a34ea376a09c8be927d, type: 2}
+  - m_Name: Explosion 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 50167152780dd8647a0b68eb2127a576, type: 2}
+  - m_Name: Explosion 2
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 986d6b30567e30e428f3f21373fe45ca, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 89252200d0314ce45bd7352deb3f137a, type: 2}
+  - m_Name: Explosion 8
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: d47e6ed162da1f740ad807d00f4679f3, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 1e49187eef4432045828fe44d38ecacd, type: 2}
+  - m_Name: Flare gun 5-2
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 0bd05763df902854a80475577a26666a, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 075aeb13e823b194b889209d6171c4c7, type: 2}
+  - m_Name: Forest 6 - Ice Forest
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: f14e8bfdac498dd4f82766090b48e582, type: 3}
+    m_Embedding: {fileID: 11400000, guid: c8eb3fd49c06ae444b3671d6e2080d27, type: 2}
+  - m_Name: Ghost Manifestation 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 26fbf6bb6963666478f6992bc53b9145, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 7271ad90dd6fbbb49bc9dd4289fd17ca, type: 2}
+  - m_Name: Ghost Manifestation 2
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 618be86712ffac947997f96463301683, type: 3}
+    m_Embedding: {fileID: 11400000, guid: cfffb9b23a5608d4eb70b44cf321cc97, type: 2}
+  - m_Name: Hand Gun 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 3d8e8b29e35fdd74bb439fe320419b8b, type: 2}
+  - m_Name: Hand Gun 2
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 34b439bf70b80a6409eadecc6be92d68, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 5f960d5dbbfd61a4f97bb5e64c9f6836, type: 2}
+  - m_Name: Hand Gun 3
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
+    m_Embedding: {fileID: 11400000, guid: ca145020585b50144b18e5758ef538e4, type: 2}
+  - m_Name: Hand Gun_6
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 6dd7024f00606b44eb5884197a66a893, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 8d136aebcf8139a4f88b2a8d444c9281, type: 2}
+  - m_Name: Heavy Object Impact 10
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 7b69beceabbd8f24e8bc62d77ac7ca1c, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 5d2c1a4b219b76f41a138069dfe17590, type: 2}
+  - m_Name: Heavy Object Impact 4
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 9930d5b4be15bb04c9d0a6fa0d7e6b2e, type: 3}
+    m_Embedding: {fileID: 11400000, guid: c06b3e90cb0f2884692a74371808426f, type: 2}
+  - m_Name: Ice Cavern-Loop
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 517dbd5357d36724c9ff71219172b9f6, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 5f62c4b7916e88e40959df1a1c3dd830, type: 2}
+  - m_Name: Indiana Jones Punch
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: e1a75776f005439469f89a17a986c567, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 62e74c7430b06824db9cee8a1b415200, type: 2}
+  - m_Name: Laser Gun Salve
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: e88084c6f293c324db2b4dcf575d60dc, type: 3}
+    m_Embedding: {fileID: 11400000, guid: d51976265076d46488d052e7ed03dfcb, type: 2}
+  - m_Name: Laser Impact Light_6
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
+    m_Embedding: {fileID: 11400000, guid: f713489a17173284d8501f30dac2bcca, type: 2}
+  - m_Name: Laser Multiple shots 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: c9bb4171cafd3dd47829336ea4c8d988, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 9ffb3cbc6595cdd478b7f6ae74768c6f, type: 2}
+  - m_Name: Machine Gun 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: d40330822ccea6140b664c0560d5022f, type: 3}
+    m_Embedding: {fileID: 11400000, guid: d158211ee3d5ae7449b3735833dfd14c, type: 2}
+  - m_Name: Magic Spell - Sleeping spell 1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: adcac75087a17704ca6c0c3b15bc3aa5, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 15e901e1180fda44e998a8c72937ac70, type: 2}
+  - m_Name: Magic Spell - Turn to stone
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 5fe4bc0609c03e24097e0cb3666a4fb5, type: 3}
+    m_Embedding: {fileID: 11400000, guid: ac2085fb6095eb346bda0aeb33c8bc7d, type: 2}
+  - m_Name: Magic Spell_Coins_2
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 601c78359f8c53a42acf9728afe59121, type: 2}
+  - m_Name: Magic Spell_Electricity Spell_1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: eec3bf121b316d64ca1c8aac7573a2f4, type: 3}
+    m_Embedding: {fileID: 11400000, guid: a313c81408ef3b34691686606944d2e5, type: 2}
+  - m_Name: Magic Spell_Short Reverse_1
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 7f4aa26d5b55226409cda231ffaf869b, type: 3}
+    m_Embedding: {fileID: 11400000, guid: dfd0d590a90bb55498b7d70a326beefd, type: 2}
+  - m_Name: Magic Spell_Simple Swoosh_6
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: cc6699269b4c1d44ea1e860518b9bb73, type: 3}
+    m_Embedding: {fileID: 11400000, guid: c3a696442b4b0fc4cb831c8888b56ff9, type: 2}
+  - m_Name: Medieval City
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: c53d52b6903e77342963b7b627f126fb, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 7be70fce454718a46b412053ab468fc0, type: 2}
+  - m_Name: Metal impact 5
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 8648b339b03c42543b08a3d99c64618a, type: 2}
+  - m_Name: Metal Impact 7
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 2e071f5b8b8467d45a5e6e24c23c6ad4, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 385ee2563456c3a408cc0d9db4026a9e, type: 2}
+  - m_Name: Missile - Shot 4
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 281e15cc92254794eaf05caf4d044b76, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 05651da839572d8409dfb3cb38c376a2, type: 2}
+  - m_Name: Monster Bite on Armor
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 8ebcb6234d419344daa712ba65bb3798, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 6dcf1e6135756794087aab5e85524805, type: 2}
+  - m_Name: Monster Bite
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 0fb3150d17e3e6e4485c20911b9173fd, type: 2}
+  - m_Name: Railgun - Shot 6
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: f9eb44b85c96be5429737d4dcadbfa3b, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 0e291df9cd5a73c4eac96e20e8913622, type: 2}
+  - m_Name: Row Boat - Loop
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 78542e76d4c24a745bc1bb599adb55df, type: 3}
+    m_Embedding: {fileID: 11400000, guid: ef964a3dd34b5ad4db8174e6e6bb2cb5, type: 2}
+  - m_Name: Secret door
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 070779cdcfbe3ff4688691fb33bc3e4e, type: 3}
+    m_Embedding: {fileID: 11400000, guid: b2165d9bb49fe6b4c892db1db686637f, type: 2}
+  - m_Name: Spaceship passing by
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 7784e7ab59ab376458c07be56b1a8d6f, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 394198901ced32a45b1340b972d86037, type: 2}
+  - m_Name: Thunder strikes 30 second- Loop
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 7dc48ac47b618424f8d032a339525809, type: 3}
+    m_Embedding: {fileID: 11400000, guid: b4634cc3e3a30fb46b8a2e3109047038, type: 2}
+  - m_Name: Tsunami hitting a Large City
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 40ab3a7e4e36423488e589303d63346f, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 93cc8b3ce1aed2c4b9878ab42759b67c, type: 2}
+  - m_Name: Walking in ChainMail - Loop
+    m_FolderName: Free Pack
+    m_Asset: {fileID: 8300000, guid: 9b713c76b05f8b04882a23a60605b0d2, type: 3}
+    m_Embedding: {fileID: 11400000, guid: 0ffc350893b14cc449e8e0a87a02423a, type: 2}
