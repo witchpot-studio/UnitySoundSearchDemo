@@ -164,16 +164,15 @@ namespace Witchpot.Editor
                     {
                         using (new EditorGUI.DisabledScope(true))
                         {
-                            Parameter.EmbeddingsWindow.Prompt = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.Prompt, m_Hight);
+                            Parameter.EmbeddingsWindow.FileName = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.Prompt, m_Hight);
                         }
-
-                        isValidFileName = Parameter.EmbeddingsWindow.ValidteFileName(Parameter.EmbeddingsWindow.Prompt);
                     }
                     else
                     {
                         Parameter.EmbeddingsWindow.FileName = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.FileName, m_Hight);
-                        isValidFileName = Parameter.EmbeddingsWindow.ValidteFileName(Parameter.EmbeddingsWindow.FileName);
                     }
+
+                    isValidFileName = Parameter.EmbeddingsWindow.ValidteFileName(Parameter.EmbeddingsWindow.FileName);
 
                     if (!isValidFileName)
                     {
