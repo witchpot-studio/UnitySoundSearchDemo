@@ -1,11 +1,10 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
-using static Witchpot.Editor.EmbeddingsWindow;
 
 namespace Witchpot.Editor
 {
-    [FilePath("Witchpot/Parameter.asset", FilePathAttribute.Location.PreferencesFolder)]
+    [FilePath("Assets/Witchpot/Editor/Scripts/Parameter.asset", FilePathAttribute.Location.ProjectFolder)]
     public class Parameter : ScriptableSingleton<Parameter>
     {
         public enum EFolderPathStatus
