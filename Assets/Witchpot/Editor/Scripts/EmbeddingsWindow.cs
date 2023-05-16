@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 #if INITIALIZED
 using OpenAI_API;
@@ -14,6 +15,24 @@ namespace Witchpot.Editor
 {
     public sealed class EmbeddingsWindow : EditorWindow
     {
+        [Serializable]
+        private class FoldoutItem
+        {
+            [SerializeField]
+            private bool m_Foldout;
+            public bool Foldout { get => m_Foldout; set => m_Foldout = value; }
+
+            [SerializeField]
+            private GUIContent m_Content;
+            public GUIContent Content => m_Content;
+
+            public FoldoutItem(bool fold, string content)
+            {
+                m_Foldout = fold;
+                m_Content = new GUIContent(content);
+            }
+        }
+
         [MenuItem("Witchpot/Editor/Embeddings Window")]
         private static void Open()
         {
@@ -59,15 +78,16 @@ namespace Witchpot.Editor
 
         private void OnEnable()
         {
-#if !INITIALIZED
-            Debug.Log("Add INITIALIZED");
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, "INITIALIZED");
-#endif
+#if INITIALIZED
             so_This = new SerializedObject(this);
             sp_SearchResult = so_This.FindProperty("m_SearchResult");
 
-#if INITIALIZED
             m_Api = new OpenAIAPI(new APIAuthentication(Parameter.ApiKey, Parameter.Organization));
+#else
+            Debug.Log("Add INITIALIZED");
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, "INITIALIZED");
+
+            Parameter.Save();
 #endif
         }
 
@@ -85,214 +105,248 @@ namespace Witchpot.Editor
 #endif
         }
 
+        private FoldoutItem m_General = new FoldoutItem(true, "General Settings");
+        private FoldoutItem m_CreateSingle = new FoldoutItem(false, "Create single embedding");
+        private FoldoutItem m_UpdateContainer = new FoldoutItem(false, "Update embeddings container");
+        private FoldoutItem m_Search = new FoldoutItem(false, "Search in embeddings container");
+        private FoldoutItem m_Others = new FoldoutItem(false, "Others");
+
         private void OnGUI()
         {
+#if INITIALIZED
             using (var scrollView = new EditorGUILayout.ScrollViewScope(m_ScrollPos, GUILayout.Height(position.height)))
             {
                 m_ScrollPos = scrollView.scrollPosition;
 
-                GUILayout.Label("General Settings", EditorStyles.boldLabel);
-                GUILayout.Space(10);
+                //GUILayout.Label("General Settings", EditorStyles.boldLabel);
+                //GUILayout.Space(10);
 
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
+                if (m_General.Foldout = EditorGUILayout.Foldout(m_General.Foldout, m_General.Content))
                 {
-                    GUILayout.Label("ApiKey", GUILayout.Width(100), m_Hight);
-
-                    Parameter.ApiKey = EditorGUILayout.TextField(Parameter.ApiKey, m_Hight);
-                }
-
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
-                {
-                    GUILayout.Label("Organization", GUILayout.Width(100), m_Hight);
-
-                    Parameter.Organization = EditorGUILayout.TextField(Parameter.Organization, m_Hight);
-                }
-
-                // GUILayout.Label($"Count : {m_Count}");
-
-                // m_CreateDummy = GUILayout.Toggle(m_CreateDummy, "Create Dummy Embeddings", m_Hight);
-
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
-                {
-                    GUILayout.Label("Output Folder", GUILayout.Width(100), m_Hight);
-
-                    Parameter.EmbeddingsWindow.OutputFolder = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.OutputFolder, m_Hight);
-
-                    if (Parameter.EmbeddingsWindow.IsValidOutputFolderPath == Parameter.EFolderPathStatus.StartIsNotAsset)
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
                     {
-                        using (new GUIColorScope(Color.red))
+                        GUILayout.Label("ApiKey", GUILayout.Width(100), m_Hight);
+
+                        Parameter.ApiKey = EditorGUILayout.TextField(Parameter.ApiKey, m_Hight);
+                    }
+
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
+                    {
+                        GUILayout.Label("Organization", GUILayout.Width(100), m_Hight);
+
+                        Parameter.Organization = EditorGUILayout.TextField(Parameter.Organization, m_Hight);
+                    }
+
+                    // GUILayout.Label($"Count : {m_Count}");
+
+                    // m_CreateDummy = GUILayout.Toggle(m_CreateDummy, "Create Dummy Embeddings", m_Hight);
+
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
+                    {
+                        GUILayout.Label("Output Folder", GUILayout.Width(100), m_Hight);
+
+                        Parameter.EmbeddingsWindow.OutputFolder = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.OutputFolder, m_Hight);
+
+                        if (Parameter.EmbeddingsWindow.IsValidOutputFolderPath == Parameter.EFolderPathStatus.StartIsNotAsset)
                         {
-                            GUILayout.Label("Output Folder must start from Assets/", m_Hight);
+                            using (new GUIColorScope(Color.red))
+                            {
+                                GUILayout.Label("Output Folder must start from Assets/", m_Hight);
+                            }
                         }
                     }
                 }
 
                 GUILayout.Box(string.Empty, GUILayout.ExpandWidth(true), m_LineHight); // ----------
 
-                GUILayout.Label("Create single embedding", EditorStyles.boldLabel);
-                GUILayout.Space(10);
+                //GUILayout.Label("Create single embedding", EditorStyles.boldLabel);
 
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
+                if (m_CreateSingle.Foldout = EditorGUILayout.Foldout(m_CreateSingle.Foldout, m_CreateSingle.Content))
                 {
-                    GUILayout.Label("Prompt", GUILayout.Width(100), m_Hight);
-
-                    Parameter.EmbeddingsWindow.Prompt = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.Prompt, m_Hight);
-                }
-
-                bool buffer = Parameter.EmbeddingsWindow.UsePromptForFileName;
-                Parameter.EmbeddingsWindow.UsePromptForFileName = GUILayout.Toggle(Parameter.EmbeddingsWindow.UsePromptForFileName, "Use prompt for file name", m_Hight);
-
-                const string m_FileNameTextField = "FileNameTextField";
-
-                if (buffer != Parameter.EmbeddingsWindow.UsePromptForFileName)
-                {
-                    if (string.Equals(GUI.GetNameOfFocusedControl(), m_FileNameTextField))
+                    GUILayout.Space(10);
+                    
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
                     {
-                        GUI.FocusControl(string.Empty);
+                        GUILayout.Label("Prompt", GUILayout.Width(100), m_Hight);
+
+                        Parameter.EmbeddingsWindow.Prompt = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.Prompt, m_Hight);
                     }
-                }
 
-                bool isValidFileName;
+                    bool buffer = Parameter.EmbeddingsWindow.UsePromptForFileName;
+                    Parameter.EmbeddingsWindow.UsePromptForFileName = GUILayout.Toggle(Parameter.EmbeddingsWindow.UsePromptForFileName, "Use prompt for file name", m_Hight);
 
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
-                {
-                    GUILayout.Label("File Name", GUILayout.Width(100), m_Hight);
+                    const string m_FileNameTextField = "FileNameTextField";
 
-                    GUI.SetNextControlName(m_FileNameTextField);
-
-                    if (Parameter.EmbeddingsWindow.UsePromptForFileName)
+                    if (buffer != Parameter.EmbeddingsWindow.UsePromptForFileName)
                     {
-                        using (new EditorGUI.DisabledScope(true))
+                        if (string.Equals(GUI.GetNameOfFocusedControl(), m_FileNameTextField))
                         {
-                            Parameter.EmbeddingsWindow.FileName = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.Prompt, m_Hight);
+                            GUI.FocusControl(string.Empty);
                         }
                     }
-                    else
-                    {
-                        Parameter.EmbeddingsWindow.FileName = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.FileName, m_Hight);
-                    }
 
-                    isValidFileName = Parameter.EmbeddingsWindow.ValidteFileName(Parameter.EmbeddingsWindow.FileName);
+                    bool isValidFileName;
 
-                    if (!isValidFileName)
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
                     {
-                        using (new GUIColorScope(Color.red))
+                        GUILayout.Label("File Name", GUILayout.Width(100), m_Hight);
+
+                        GUI.SetNextControlName(m_FileNameTextField);
+
+                        if (Parameter.EmbeddingsWindow.UsePromptForFileName)
                         {
-                            GUILayout.Label("File Name is invalid", m_Hight);
+                            using (new EditorGUI.DisabledScope(true))
+                            {
+                                Parameter.EmbeddingsWindow.FileName = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.Prompt, m_Hight);
+                            }
+                        }
+                        else
+                        {
+                            Parameter.EmbeddingsWindow.FileName = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.FileName, m_Hight);
+                        }
+
+                        isValidFileName = Parameter.EmbeddingsWindow.ValidteFileName(Parameter.EmbeddingsWindow.FileName);
+
+                        if (!isValidFileName)
+                        {
+                            using (new GUIColorScope(Color.red))
+                            {
+                                GUILayout.Label("File Name is invalid", m_Hight);
+                            }
                         }
                     }
-                }
 
-                bool CreateEnabled =
-                    isValidFileName &&
-                    Parameter.EmbeddingsWindow.IsValidOutputFolderPath == Parameter.EFolderPathStatus.Valid &&
-                    !m_TaskExist;
+                    bool CreateEnabled =
+                        isValidFileName &&
+                        Parameter.EmbeddingsWindow.IsValidOutputFolderPath == Parameter.EFolderPathStatus.Valid &&
+                        !m_TaskExist;
 
-                using (new EditorGUI.DisabledScope(!CreateEnabled))
-                {
-                    if (GUILayout.Button("Create", m_Hight))
+                    using (new EditorGUI.DisabledScope(!CreateEnabled))
                     {
-                        CreateEmbeddingsAsync(Parameter.EmbeddingsWindow.FileName, Parameter.EmbeddingsWindow.Prompt, Parameter.EmbeddingsWindow.OutputFolder).Forget();
+                        if (GUILayout.Button("Create", m_Hight))
+                        {
+                            CreateEmbeddingsAsync(Parameter.EmbeddingsWindow.FileName, Parameter.EmbeddingsWindow.Prompt, Parameter.EmbeddingsWindow.OutputFolder).Forget();
+                        }
                     }
+
                 }
 
                 GUILayout.Box(string.Empty, GUILayout.ExpandWidth(true), m_LineHight); // ----------
 
-                GUILayout.Label("Update embeddings container", EditorStyles.boldLabel);
-                GUILayout.Space(10);
+                //GUILayout.Label("Update embeddings container", EditorStyles.boldLabel);
 
-                Parameter.EmbeddingsWindow.EmbeddingsContainerForUpdate = (EmbeddingsContainer)EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.EmbeddingsContainerForUpdate, typeof(EmbeddingsContainer), true);
-
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
+                if (m_UpdateContainer.Foldout = EditorGUILayout.Foldout(m_UpdateContainer.Foldout, m_UpdateContainer.Content))
                 {
-                    GUILayout.Label("Include Folder", GUILayout.Width(100), m_Hight);
+                    GUILayout.Space(10);
+                    
+                    Parameter.EmbeddingsWindow.EmbeddingsContainerForUpdate = (EmbeddingsContainer)EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.EmbeddingsContainerForUpdate, typeof(EmbeddingsContainer), true);
 
-                    Parameter.EmbeddingsWindow.IncludeFolder = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.IncludeFolder, m_Hight);
-
-                    if (Parameter.EmbeddingsWindow.IsValidIncludeFolder == Parameter.EFolderPathStatus.StartIsNotAsset)
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
                     {
-                        using (new GUIColorScope(Color.red))
+                        GUILayout.Label("Include Folder", GUILayout.Width(100), m_Hight);
+
+                        Parameter.EmbeddingsWindow.IncludeFolder = EditorGUILayout.TextField(Parameter.EmbeddingsWindow.IncludeFolder, m_Hight);
+
+                        if (Parameter.EmbeddingsWindow.IsValidIncludeFolder == Parameter.EFolderPathStatus.StartIsNotAsset)
                         {
-                            GUILayout.Label("Include Folder must start from Assets/", m_Hight);
+                            using (new GUIColorScope(Color.red))
+                            {
+                                GUILayout.Label("Include Folder must start from Assets/", m_Hight);
+                            }
+                        }
+                        else if (Parameter.EmbeddingsWindow.IsValidIncludeFolder == Parameter.EFolderPathStatus.FolderNotExist)
+                        {
+                            using (new GUIColorScope(Color.red))
+                            {
+                                GUILayout.Label("Include Folder not Exist", m_Hight);
+                            }
                         }
                     }
-                    else if (Parameter.EmbeddingsWindow.IsValidIncludeFolder == Parameter.EFolderPathStatus.FolderNotExist)
+
+                    Parameter.EmbeddingsWindow.LimitProcessSpeed = GUILayout.Toggle(Parameter.EmbeddingsWindow.LimitProcessSpeed, "Limit process speed (Trial account limited 60 access/min)", m_Hight);
+
+                    using (new EditorGUI.DisabledScope(!UpdateEnabled))
                     {
-                        using (new GUIColorScope(Color.red))
+                        if (GUILayout.Button("Update", m_Hight))
                         {
-                            GUILayout.Label("Include Folder not Exist", m_Hight);
+                            UpdateEmbeddingsContainerAsync(Parameter.EmbeddingsWindow.IncludeFolder, Parameter.EmbeddingsWindow.OutputFolder).Forget();
+                        }
+                    }
+
+                    using (new EditorGUI.DisabledScope(!m_TaskExist))
+                    {
+                        if (GUILayout.Button("Cancel", m_Hight))
+                        {
+                            m_TaskCanceled = true;
                         }
                     }
                 }
 
-                Parameter.EmbeddingsWindow.LimitProcessSpeed = GUILayout.Toggle(Parameter.EmbeddingsWindow.LimitProcessSpeed, "Limit process speed (Trial account limited 60 access/min)", m_Hight);
 
-                using (new EditorGUI.DisabledScope(!UpdateEnabled))
-                {
-                    if (GUILayout.Button("Update", m_Hight))
-                    {
-                        UpdateEmbeddingsContainerAsync(Parameter.EmbeddingsWindow.IncludeFolder, Parameter.EmbeddingsWindow.OutputFolder).Forget();
-                    }
-                }
+                GUILayout.Box(string.Empty, GUILayout.ExpandWidth(true), m_LineHight); // ----------
 
-                using (new EditorGUI.DisabledScope(!m_TaskExist))
+                //GUILayout.Label("Search in embeddings container", EditorStyles.boldLabel);
+
+                if (m_Search.Foldout = EditorGUILayout.Foldout(m_Search.Foldout, m_Search.Content))
                 {
-                    if (GUILayout.Button("Cancel", m_Hight))
+                    GUILayout.Space(10);
+                    
+                    Parameter.EmbeddingsWindow.EmbeddingsContainerForSearch = (EmbeddingsContainer)EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.EmbeddingsContainerForSearch, typeof(EmbeddingsContainer), true);
+                    Parameter.EmbeddingsWindow.EmbeddingsForSearch = (EmbeddingsData)EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.EmbeddingsForSearch, typeof(EmbeddingsData), true);
+
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
                     {
-                        m_TaskCanceled = true;
+                        GUILayout.Label("Search Count", GUILayout.Width(100), m_Hight);
+
+                        Parameter.EmbeddingsWindow.SearchCount = EditorGUILayout.IntField(Parameter.EmbeddingsWindow.SearchCount);
                     }
+
+                    using (new EditorGUI.DisabledScope(!SearchEnabled))
+                    {
+                        if (GUILayout.Button("Search", m_Hight))
+                        {
+                            m_SearchResult = Parameter.EmbeddingsWindow.EmbeddingsContainerForSearch.SearchCloseAsset(Parameter.EmbeddingsWindow.EmbeddingsForSearch, Parameter.EmbeddingsWindow.SearchCount);
+                        }
+                    }
+
+                    so_This.Update();
+
+                    if (sp_SearchResult != null)
+                    {
+                        EditorGUILayout.PropertyField(sp_SearchResult, true);
+                    }
+
+                    so_This.ApplyModifiedProperties();
                 }
 
                 GUILayout.Box(string.Empty, GUILayout.ExpandWidth(true), m_LineHight); // ----------
 
-                GUILayout.Label("Search in embeddings container", EditorStyles.boldLabel);
-                GUILayout.Space(10);
-
-                Parameter.EmbeddingsWindow.EmbeddingsContainerForSearch = (EmbeddingsContainer)EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.EmbeddingsContainerForSearch, typeof(EmbeddingsContainer), true);
-                Parameter.EmbeddingsWindow.EmbeddingsForSearch = (EmbeddingsData)EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.EmbeddingsForSearch, typeof(EmbeddingsData), true);
-
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
+                if (m_Others.Foldout = EditorGUILayout.Foldout(m_Others.Foldout, m_Others.Content))
                 {
-                    GUILayout.Label("Search Count", GUILayout.Width(100), m_Hight);
+                    GUILayout.Space(10);
 
-                    Parameter.EmbeddingsWindow.SearchCount = EditorGUILayout.IntField(Parameter.EmbeddingsWindow.SearchCount);
-                }
+                    GUILayout.Label("Calculate distance", EditorStyles.boldLabel);
 
-                using (new EditorGUI.DisabledScope(!SearchEnabled))
-                {
-                    if (GUILayout.Button("Search", m_Hight))
+                    Parameter.EmbeddingsWindow.Embeddings1 = (EmbeddingsData) EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.Embeddings1, typeof(EmbeddingsData), true);
+                    Parameter.EmbeddingsWindow.Embeddings2 = (EmbeddingsData) EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.Embeddings2, typeof(EmbeddingsData), true);
+
+                    using (new EditorGUILayout.HorizontalScope(m_Hight))
                     {
-                        m_SearchResult = Parameter.EmbeddingsWindow.EmbeddingsContainerForSearch.SearchCloseAsset(Parameter.EmbeddingsWindow.EmbeddingsForSearch, Parameter.EmbeddingsWindow.SearchCount);
+                        if (GUILayout.Button("Calc", GUILayout.Width(50), m_Hight))
+                        {
+                            m_Distance = EmbeddingsData.CalcEuclideanDistance(Parameter.EmbeddingsWindow.Embeddings1, Parameter.EmbeddingsWindow.Embeddings2);
+                        }
+
+                        m_Distance = EditorGUILayout.FloatField(m_Distance, m_Hight);
                     }
-                }
-
-                so_This.Update();
-
-                if (sp_SearchResult != null)
-                {
-                    EditorGUILayout.PropertyField(sp_SearchResult, true);
-                }
-
-                so_This.ApplyModifiedProperties();
-
-                GUILayout.Box(string.Empty, GUILayout.ExpandWidth(true), m_LineHight); // ----------
-
-                GUILayout.Label("Calculate distance", EditorStyles.boldLabel);
-                GUILayout.Space(10);
-
-                Parameter.EmbeddingsWindow.Embeddings1 = (EmbeddingsData) EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.Embeddings1, typeof(EmbeddingsData), true);
-                Parameter.EmbeddingsWindow.Embeddings2 = (EmbeddingsData) EditorGUILayout.ObjectField(Parameter.EmbeddingsWindow.Embeddings2, typeof(EmbeddingsData), true);
-
-                using (new EditorGUILayout.HorizontalScope(m_Hight))
-                {
-                    if (GUILayout.Button("Calc", GUILayout.Width(50), m_Hight))
-                    {
-                        m_Distance = EmbeddingsData.CalcEuclideanDistance(Parameter.EmbeddingsWindow.Embeddings1, Parameter.EmbeddingsWindow.Embeddings2);
-                    }
-
-                    m_Distance = EditorGUILayout.FloatField(m_Distance, m_Hight);
                 }
             }
+#else
+            using (new GUIColorScope(Color.red))
+            {
+                GUILayout.Label("Initializing...", m_Hight);
+            }
+#endif
         }
 
         private async UniTask<EmbeddingsData> CreateEmbeddingsInternal(string embeddingFileName, string prompt, string outputPath)

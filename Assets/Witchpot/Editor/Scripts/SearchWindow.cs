@@ -35,7 +35,8 @@ namespace Witchpot.Editor
         private List<AssetBinder> m_SearchResult = new();
 
         private bool SearchEnabled =>
-            Parameter.EmbeddingsWindow.EmbeddingsContainerForSearch != null &&
+            Parameter.ApiKeyIsReady &&
+            Parameter.SearchWindow.EmbeddingsContainerForSearch != null &&
             !string.IsNullOrEmpty(m_Prompt) &&
             !m_Searching;
 
@@ -43,14 +44,10 @@ namespace Witchpot.Editor
 
         private void OnEnable()
         {
-#if !INITIALIZED
-            Debug.Log("Add INITIALIZED");
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, "INITIALIZED");
-#endif
+#if INITIALIZED
             so_This = new SerializedObject(this);
             sp_SearchResult = so_This.FindProperty("m_SearchResult");
 
-#if INITIALIZED
             m_Api = new OpenAIAPI(new APIAuthentication(Parameter.ApiKey, Parameter.Organization));
 #endif
         }
@@ -64,6 +61,7 @@ namespace Witchpot.Editor
 
         private void OnGUI()
         {
+#if INITIALIZED
             GUILayout.Label("Search in embeddings container", EditorStyles.boldLabel);
             GUILayout.Space(10);
 
@@ -91,6 +89,14 @@ namespace Witchpot.Editor
                 }
             }
 
+            if (!Parameter.ApiKeyIsReady)
+            {
+                using (new GUIColorScope(Color.red))
+                {
+                    GUILayout.Label("Please set ApiKey in the embeddings window first.", m_Hight);
+                }
+            }
+
             so_This.Update();
 
             if (sp_SearchResult != null)
@@ -99,6 +105,12 @@ namespace Witchpot.Editor
             }
 
             so_This.ApplyModifiedProperties();
+#else
+            using (new GUIColorScope(Color.red))
+            {
+                GUILayout.Label("Please set it up in the embeddings window first.", m_Hight);
+            }
+#endif
         }
 
         private async UniTask Search()
@@ -134,5 +146,6 @@ namespace Witchpot.Editor
                 m_Searching = false;
             }
         }
+
     }
 }
