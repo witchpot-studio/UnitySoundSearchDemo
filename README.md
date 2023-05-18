@@ -19,7 +19,7 @@ Open Menu > Witchpot > Editor > Embeddings Window
 
 Add your own OpenAI API key and Organization(optional)    
 You can generate it in [OpenAI web page](https://platform.openai.com/account/api-keys) (Log in is required)    
-> \*Note that the API key is saved in Assets\Witchpot\Editor\Scripts\Parameter.asset. It is set gitignore but be careful to avoid pushing to git.    
+> \*Note that the API key is saved in Assets\Witchpot\Editor\Scripts\Parameter.asset. It is set gitignore but be careful to avoid pushing it to git.    
 
 ![menu_embeddings_key](Images/embeddings_window.png)
     
@@ -30,7 +30,7 @@ Open Menu > Witchpot > Editor > Search Window
 ![menu_embeddings_searchwindow](Images/menu_embeddings_searchwindow.png)
 
 Add search Prompt and push Search button.    
-The most related file name will be in search result.
+The most related file name will be in search result.    
 ![searchwindow](Images/searchwindow.png)
 
 The search is based on the euclidean distance of embeddings of prompt and each audio files name's embeddings.
