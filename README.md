@@ -18,6 +18,9 @@ Open Menu > Witchpot > Editor > Embeddings Window
 ![menu_embeddings_window](Images/menu_embeddings_window.png)    
 
 Add your own OpenAI API key and Organization(optional)    
+You can generate it in [OpenAI web page](https://platform.openai.com/account/api-keys) (Log in is required)    
+> \*Note that the API key is saved in Assets\Witchpot\Editor\Scripts\Parameter.asset. It is set gitignore but be careful to avoid pushing to git.    
+
 ![menu_embeddings_key](Images/embeddings_window.png)
     
 We already have search example with free asset [Free Sound Effects Pack](https://assetstore.unity.com/packages/audio/sound-fx/free-sound-effects-pack-155776)    
