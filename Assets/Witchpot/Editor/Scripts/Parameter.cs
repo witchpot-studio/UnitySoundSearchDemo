@@ -1,11 +1,10 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
-using static Witchpot.Editor.EmbeddingsWindow;
 
 namespace Witchpot.Editor
 {
-    [FilePath("Witchpot/Parameter.asset", FilePathAttribute.Location.PreferencesFolder)]
+    [FilePath("Assets/Witchpot/Editor/Scripts/Parameter.asset", FilePathAttribute.Location.ProjectFolder)]
     public class Parameter : ScriptableSingleton<Parameter>
     {
         public enum EFolderPathStatus
@@ -16,10 +15,14 @@ namespace Witchpot.Editor
             FolderNotExist,
         }
 
+        private const string FirstApiKey = "Your api key";
+
         // OpenAI
         [SerializeField]
-        private string m_ApiKey = "Your api key";
+        private string m_ApiKey = FirstApiKey;
         public static string ApiKey { get => instance.m_ApiKey; set => instance.m_ApiKey = value; }
+
+        public static bool ApiKeyIsReady => !string.IsNullOrEmpty(instance.m_ApiKey) && !string.Equals(instance.m_ApiKey, FirstApiKey);
 
         [SerializeField]
         private string m_Organization = string.Empty;
